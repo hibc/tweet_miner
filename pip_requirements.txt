@@ -1,0 +1,2 @@
+PyQt5==5.10
+python-twitter==3.3
