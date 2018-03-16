@@ -1,4 +1,4 @@
-<h1>Tweet Miner using Python-Twitter API with simple GUI</h1>
+<h1>Tweet Miner using Python-Twitter with simple GUI</h1>
 
 <div>
   <h2>Description:</h2>
