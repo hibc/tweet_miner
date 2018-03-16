@@ -10,6 +10,6 @@
 </div>
 <div>
   <b>How to use:</b><br>
-  <code>pip install -r pip_requirements.txt</code>
+  <code>pip install -r pip_requirements.txt</code><br>
   <code>python main.py</code>
 </div>
