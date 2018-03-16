@@ -1,11 +1,18 @@
 # tweet_miner
-Tweet Miner using Python Twitter API
+<h1>Tweet Miner using Python Twitter API</h1>
 
-Description:
+<div>
+  <h2>Description:</h2>
 
-GUI: PyQT5
+</div>
 
-Tweet Miner: python-twitter
-
-How to run:
-python main.py
+<div>
+  <b>GUI</b>: PyQT5
+</div>
+<div>
+  <b>Tweet Miner</b>: python-twitter
+</div>
+<div>
+  <b>How to run:</b>
+  python main.py
+</div>
