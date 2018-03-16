@@ -13,3 +13,9 @@
   <code>pip install -r pip_requirements.txt</code><br>
   <code>python main.py</code>
 </div>
+
+<h4>TODO:</h4>
+<ul>
+  <li>Currently user can only save output file in Mac OS. Should also save output in Windows OS too.</li>
+  <li>Need to handle some inputs like follow, locations and languages.</li>
+</ul>
