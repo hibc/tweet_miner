@@ -163,10 +163,10 @@ class TweetWindow(QWidget):
         process = subprocess.Popen("exec " + cmd, shell=True, stdout=subprocess.PIPE)
         self.mine_process = process
         
-        if not verified_user:
-            self.show_user_unverified_dialog()
-        else:
-            self.show_mine_start_stop_message_dialog(start=True)
+#         if not verified_user:
+#             self.show_user_unverified_dialog()
+#         else:
+        self.show_mine_start_stop_message_dialog(start=True)
 
     def show_user_unverified_dialog(self):
         print("Unverified User")
