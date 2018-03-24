@@ -1,4 +1,6 @@
 from twitter import Api
+from twitter import error
+from tweet_window import *
 
 import tweet_window as tw
 import os
@@ -40,9 +42,9 @@ class TweetMine():
         self.search_follow = config_args.follow
 
         self.file_save_path = config_args.file_path
-
-        self.tracking_tags = []
         self.languages = []
+        self.search_track_list = []
+        self.search_follow_list = []
 
         self.set_twitter_config_API()
         self.set_search_config()
@@ -63,14 +65,14 @@ class TweetMine():
             self.languages=[self.search_language]
         
         self.search_follow_list = self.search_follow.split(',')    
-        self.tracking_tags_list = self.search_track.split(',')
+        self.search_track_list = self.search_track.split(',')
     
     def run(self):
         num_of_tweets = 0
         # # api.GetStreamFilter will return a generator that yields one status
         # # message (i.e., Tweet) at a time as a JSON dictionary.
         try:
-            for tweet in self.api.GetStreamFilter(track=self.tracking_tags_list, 
+            for tweet in self.api.GetStreamFilter(track=self.search_track_list, 
                 languages=self.languages, locations=self.search_location, 
                 follow=self.search_follow_list):
                 num_of_tweets += 1
