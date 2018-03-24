@@ -129,7 +129,11 @@ class TweetWindow(QWidget):
         return search_main_box
         
     def on_click_mine_start_btn(self):
-
+        if ( len(self.tw_consumer_key_edit.text()) == 0 or len(self.tw_consumer_secret_edit.text())==0 \
+            or len(self.tw_access_secret_edit.text()) == 0 or len(self.tw_access_token_edit.text())==0):
+            self.show_required_dialog()
+            return
+        
         twitter_info_all = {
             "TwitterConfig": {            
                 "consumer_key": self.tw_consumer_key_edit.text(),
@@ -163,11 +167,19 @@ class TweetWindow(QWidget):
         process = subprocess.Popen("exec " + cmd, shell=True, stdout=subprocess.PIPE)
         self.mine_process = process
         
-#         if not verified_user:
-#             self.show_user_unverified_dialog()
-#         else:
         self.show_mine_start_stop_message_dialog(start=True)
 
+    def show_required_dialog(self):
+        msg_box = QMessageBox(self)
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setWindowTitle("Twitter Tweet Miner")
+        msg_box.setText("Configurations cannot be blank!!")
+        
+        try:
+            msg_box.exec_()
+        except Exception as e:
+            print(str(e))
+    
     def show_user_unverified_dialog(self):
         print("Unverified User")
         self.mine_process.kill()
