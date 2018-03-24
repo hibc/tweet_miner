@@ -7,28 +7,28 @@ import argparse
 import sys
 # import json
 
+'''
+follow:
+    A list of user IDs to track. [Optional]
+track:
+    A list of expressions to track. [Optional]
+locations:
+    A list of Longitude,Latitude pairs (as strings) specifying
+    bounding boxes for the tweets' origin. [Optional]
+delimited:
+    Specifies a message length. [Optional]
+stall_warnings:
+    Set to True to have Twitter deliver stall warnings. [Optional]
+languages:
+    A list of Languages.
+    Will only return Tweets that have been detected as being
+    written in the specified languages. [Optional]
+'''
+    
 class TweetMine():
     def __init__(self, config_args=None):
         self.numer_of_msg = 0
         self.api = None
-        '''
-        follow:
-            A list of user IDs to track. [Optional]
-        track:
-            A list of expressions to track. [Optional]
-        locations:
-            A list of Longitude,Latitude pairs (as strings) specifying
-            bounding boxes for the tweets' origin. [Optional]
-        delimited:
-            Specifies a message length. [Optional]
-        stall_warnings:
-            Set to True to have Twitter deliver stall warnings. [Optional]
-        languages:
-            A list of Languages.
-            Will only return Tweets that have been detected as being
-            written in the specified languages. [Optional]
-        '''
-
         self.consumer_key = config_args.consumer_key
         self.consumer_secret = config_args.consumer_secret
         self.access_token = config_args.access_token
@@ -52,9 +52,6 @@ class TweetMine():
         try:
             self.api = Api(consumer_key=self.consumer_key, consumer_secret=self.consumer_secret,
             access_token_key=self.access_token, access_token_secret=self.access_secret)
-            
-            if self.api.VerifyCredentials():
-                verified_user = True
         except Exception as e:
             print(e)
 
@@ -62,16 +59,20 @@ class TweetMine():
         
         if self.search_language is None or self.search_language == '':
             self.languages = ['en']
-        self.tracking_tags = self.search_track.split(',')
+        else:
+            self.languages=[self.search_language]
+        
+        self.search_follow_list = self.search_follow.split(',')    
+        self.tracking_tags_list = self.search_track.split(',')
     
     def run(self):
         num_of_tweets = 0
         # # api.GetStreamFilter will return a generator that yields one status
         # # message (i.e., Tweet) at a time as a JSON dictionary.
         try:
-            for tweet in self.api.GetStreamFilter(track=self.tracking_tags, 
+            for tweet in self.api.GetStreamFilter(track=self.tracking_tags_list, 
                 languages=self.languages, locations=self.search_location, 
-                follow=self.search_follow):
+                follow=self.search_follow_list):
                 num_of_tweets += 1
 
                 # it might be good to write to a file
