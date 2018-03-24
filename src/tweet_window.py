@@ -158,11 +158,11 @@ class TweetWindow(QWidget):
         " --consumer_secret=" + twitter_info_all["TwitterConfig"]['consumer_secret'] +\
         " --access_token=" + twitter_info_all["TwitterConfig"]['access_token'] +\
         " --access_secret=" + twitter_info_all["TwitterConfig"]['access_secret'] +\
-        " --track=" + twitter_info_all["SearchConfig"]["keyword"] +\
-        " --file_path=" + twitter_info_all["FileConfig"]["full_path"]+\
-        " --locations=" + twitter_info_all["SearchConfig"]["location"]+\
-        " --follow=" + twitter_info_all["SearchConfig"]["follow_id"]+\
-        " --languages=" + twitter_info_all["SearchConfig"]["language"]
+        " --track=\'" + twitter_info_all["SearchConfig"]["keyword"] +\
+        "\' --file_path=" + twitter_info_all["FileConfig"]["full_path"]+\
+        " --locations=\'" + twitter_info_all["SearchConfig"]["location"]+\
+        "\' --follow=\'" + twitter_info_all["SearchConfig"]["follow_id"]+\
+        "\' --languages=" + twitter_info_all["SearchConfig"]["language"]
         
         process = subprocess.Popen("exec " + cmd, shell=True, stdout=subprocess.PIPE)
         self.mine_process = process
