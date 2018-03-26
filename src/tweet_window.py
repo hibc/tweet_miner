@@ -152,15 +152,15 @@ class TweetWindow(QWidget):
             }
         }
 
-        cmd = "python tweet_mine.py --consumer_key=" + twitter_info_all["TwitterConfig"]['consumer_key'] +\
-        " --consumer_secret=" + twitter_info_all["TwitterConfig"]['consumer_secret'] +\
-        " --access_token=" + twitter_info_all["TwitterConfig"]['access_token'] +\
-        " --access_secret=" + twitter_info_all["TwitterConfig"]['access_secret'] +\
-        " --track=\'" + twitter_info_all["SearchConfig"]["keyword"] +\
-        "\' --file_path=" + twitter_info_all["FileConfig"]["full_path"]+\
-        " --locations=\'" + twitter_info_all["SearchConfig"]["location"]+\
+        cmd = "python tweet_mine.py --consumer_key=\'" + twitter_info_all["TwitterConfig"]['consumer_key'] +\
+        "\' --consumer_secret=\'" + twitter_info_all["TwitterConfig"]['consumer_secret'] +\
+        "\' --access_token=\'" + twitter_info_all["TwitterConfig"]['access_token'] +\
+        "\' --access_secret=\'" + twitter_info_all["TwitterConfig"]['access_secret'] +\
+        "\' --track=\'" + twitter_info_all["SearchConfig"]["keyword"] +\
+        "\' --file_path=\'" + twitter_info_all["FileConfig"]["full_path"]+\
+        "\' --locations=\'" + twitter_info_all["SearchConfig"]["location"]+\
         "\' --follow=\'" + twitter_info_all["SearchConfig"]["follow_id"]+\
-        "\' --languages=" + twitter_info_all["SearchConfig"]["language"]
+        "\' --languages=\'" + twitter_info_all["SearchConfig"]["language"] + "\'"
         
         prefix = ""
         if current_os == 'darwin':
