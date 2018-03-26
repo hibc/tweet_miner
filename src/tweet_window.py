@@ -144,7 +144,7 @@ class TweetWindow(QWidget):
             "FileConfig": {            
                 'name': self.file_line_edit.text(),
                 'location': self.file_location_line_edit.text(),
-                'full_path': self.file_location_line_edit.text() + '/' + self.file_line_edit.text()
+                'full_path': QDir.toNativeSeparators(self.file_location_line_edit.text() + '/' + self.file_line_edit.text())
             }, 
             "SearchConfig":{
                 'location': self.search_config_location_input.text(),
