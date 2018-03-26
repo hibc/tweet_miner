@@ -85,14 +85,12 @@ class TweetWindow(QWidget):
         if current_os == 'darwin':
             default_directory = '/Users/' + current_user + '/Desktop/'
         elif current_os == 'win32':
-#             default_directory = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
-            default_directory = 'C:\\Users\\' + current_user + '\\Desktop'
+            default_directory = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
         
         print('default directory is ' + default_directory)
         directory_path = QFileDialog.getExistingDirectory(self, "Browse File", default_directory, QFileDialog.ShowDirsOnly)
-        print("file_directry: " + directory_path)
-        print("native_sep: " + QDir.toNativeSeparators(directory_path))
-        self.file_location_line_edit.setText(directory_path)
+        print("file_directry: " + QDir.toNativeSeparators(directory_path))
+        self.file_location_line_edit.setText(QDir.toNativeSeparators(directory_path))
 
     def search_layout(self):
         search_main_box = QGroupBox("Search config and box")
