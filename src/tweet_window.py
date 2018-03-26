@@ -166,7 +166,7 @@ class TweetWindow(QWidget):
         if current_os == 'darwin':
             prefix = "exec "
         elif current_os == 'win32':
-            prefix = ""
+            prefix = "call "
             
         process = subprocess.Popen(prefix + cmd, shell=True, stdout=subprocess.PIPE)
         self.mine_process = process
