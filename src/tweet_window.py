@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QDir
 from tweet_mine import *
 
 import getpass
@@ -91,6 +91,7 @@ class TweetWindow(QWidget):
         print('default directory is ' + default_directory)
         directory_path = QFileDialog.getExistingDirectory(self, "Browse File", default_directory, QFileDialog.ShowDirsOnly)
         print("file_directry: " + directory_path)
+        print("native_sep: " + QDir.toNativeSeparators(directory_path))
         self.file_location_line_edit.setText(directory_path)
 
     def search_layout(self):
@@ -143,7 +144,7 @@ class TweetWindow(QWidget):
             "FileConfig": {            
                 'name': self.file_line_edit.text(),
                 'location': self.file_location_line_edit.text(),
-                'full_path': self.file_location_line_edit.text() + '/' + self.file_line_edit.text() if current_os == 'darwin' else self.file_location_line_edit.text() + '\\' + self.file_line_edit.text()
+                'full_path': self.file_location_line_edit.text() + '/' + self.file_line_edit.text()
             }, 
             "SearchConfig":{
                 'location': self.search_config_location_input.text(),
