@@ -165,9 +165,7 @@ class TweetWindow(QWidget):
         prefix = ""
         if current_os == 'darwin':
             prefix = "exec "
-        elif current_os == 'win32':
-            prefix = "call "
-            
+           
         process = subprocess.Popen(prefix + cmd, shell=True, stdout=subprocess.PIPE)
         self.mine_process = process
         
@@ -186,7 +184,8 @@ class TweetWindow(QWidget):
     
     def show_user_unverified_dialog(self):
         print("Unverified User")
-        self.mine_process.kill()
+        if self.mine_process is not None:
+            self.mine_process.kill()
         msg_box = QMessageBox(self)
         msg_box.setIcon(QMessageBox.Information)
         msg_box.setWindowTitle("Twitter Tweet Miner")
