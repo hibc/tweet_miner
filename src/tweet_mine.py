@@ -73,8 +73,8 @@ class TweetMine():
         # # message (i.e., Tweet) at a time as a JSON dictionary.
         try:
             for tweet in self.api.GetStreamFilter(track=self.search_track_list, 
-                languages=self.languages, locations=self.search_location, 
-                follow=self.search_follow_list):
+                languages=self.languages, locations=None, 
+                follow=None):
                 num_of_tweets += 1
 
                 # it might be good to write to a file
