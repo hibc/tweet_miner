@@ -85,7 +85,8 @@ class TweetWindow(QWidget):
         if current_os == 'darwin':
             default_directory = '/Users/' + current_user + '/Desktop/'
         elif current_os == 'win32':
-            default_directory = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop') 
+#             default_directory = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+            default_directory = 'C:\\Users\\' + current_user + '\\Desktop\\'
         
         print('default directory is ' + default_directory)
         directory_path = QFileDialog.getExistingDirectory(self, "Browse File", default_directory, QFileDialog.ShowDirsOnly)
