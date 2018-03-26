@@ -2,10 +2,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt, QDir
 from tweet_mine import *
 
-import getpass
 import sys
 import os
-import subprocess
+import subprocess, shlex
 # import json
 
 current_os = sys.platform
@@ -79,17 +78,16 @@ class TweetWindow(QWidget):
         return file_group_box
     
     def file_browse_dialog(self):
-        current_user = getpass.getuser()
         default_directory = ""
         
         if current_os == 'darwin':
-            default_directory = '/Users/' + current_user + '/Desktop/'
+            default_directory = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
         elif current_os == 'win32':
             default_directory = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
         
-        print('default directory is ' + default_directory)
+#         print('default directory is ' + default_directory)
         directory_path = QFileDialog.getExistingDirectory(self, "Browse File", default_directory, QFileDialog.ShowDirsOnly)
-        print("file_directry: " + QDir.toNativeSeparators(directory_path))
+#         print("file_directry: " + QDir.toNativeSeparators(directory_path))
         self.file_location_line_edit.setText(QDir.toNativeSeparators(directory_path))
 
     def search_layout(self):
@@ -152,21 +150,18 @@ class TweetWindow(QWidget):
             }
         }
 
-        cmd = "python tweet_mine.py --consumer_key=\'" + twitter_info_all["TwitterConfig"]['consumer_key'] +\
-        "\' --consumer_secret=\'" + twitter_info_all["TwitterConfig"]['consumer_secret'] +\
-        "\' --access_token=\'" + twitter_info_all["TwitterConfig"]['access_token'] +\
-        "\' --access_secret=\'" + twitter_info_all["TwitterConfig"]['access_secret'] +\
-        "\' --track=\'" + twitter_info_all["SearchConfig"]["keyword"] +\
-        "\' --file_path=\'" + twitter_info_all["FileConfig"]["full_path"]+\
-        "\' --locations=\'" + twitter_info_all["SearchConfig"]["location"]+\
-        "\' --follow=\'" + twitter_info_all["SearchConfig"]["follow_id"]+\
-        "\' --languages=\'" + twitter_info_all["SearchConfig"]["language"] + "\'"
+        cmd = "python tweet_mine.py --consumer_key \'" + twitter_info_all["TwitterConfig"]['consumer_key'] +\
+        "\' --consumer_secret \'" + twitter_info_all["TwitterConfig"]['consumer_secret'] +\
+        "\' --access_token \'" + twitter_info_all["TwitterConfig"]['access_token'] +\
+        "\' --access_secret \'" + twitter_info_all["TwitterConfig"]['access_secret'] +\
+        "\' --track \'" + twitter_info_all["SearchConfig"]["keyword"] +\
+        "\' --file_path \'" + twitter_info_all["FileConfig"]["full_path"]+\
+        "\' --locations \'" + twitter_info_all["SearchConfig"]["location"]+\
+        "\' --follow \'" + twitter_info_all["SearchConfig"]["follow_id"]+\
+        "\' --languages \'" + twitter_info_all["SearchConfig"]["language"] + "\'"
         
-        prefix = ""
-        if current_os == 'darwin':
-            prefix = "exec "
-           
-        process = subprocess.Popen(prefix + cmd, shell=True, stdout=subprocess.PIPE)
+        args = shlex.split(cmd)
+        process = subprocess.Popen(args, stdout=subprocess.PIPE)
         self.mine_process = process
         
         self.show_mine_start_stop_message_dialog(start=True)
