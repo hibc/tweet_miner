@@ -64,7 +64,7 @@ class TweetMine():
         else:
             self.languages=[self.search_language]
         
-        self.search_follow_list = None if self.search_follows == "" else self.search_follows.split(',')    
+        self.search_follow_list = None if self.search_follow == "" else self.search_follow.split(',')    
         self.search_track_list = None if self.search_track == "" else self.search_track.split(',')
     
     def run(self):
