@@ -79,15 +79,13 @@ class TweetWindow(QWidget):
         return file_group_box
     
     def file_browse_dialog(self):
-        current_user = ""
+        current_user = getpass.getuser()
         default_directory = ""
         
         if current_os == 'darwin':
-            current_user = getpass.getuser()
             default_directory = '/Users/' + current_user + '/Desktop/'
         elif current_os == 'win32':
-            current_user = ''
-            default_directory = ''
+            default_directory = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop') 
         
         print('default directory is ' + default_directory)
         directory_path = QFileDialog.getExistingDirectory(self, "Browse File", default_directory, QFileDialog.ShowDirsOnly)
