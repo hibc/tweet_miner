@@ -196,8 +196,8 @@ class TweetWindow(QWidget):
         print("pressed stop mining button")
         if self.mine_process is not None:
             self.mine_process.kill()
+            print(self.mine_process.stdout.read())
         mine_status = False
-        print(self.mine_process.stdout.read())
         self.show_mine_start_stop_message_dialog(start=False)
 
     def show_mine_start_stop_message_dialog(self, start=False):
