@@ -79,7 +79,7 @@ class TweetMine():
 
                 # it might be good to write to a file
                 # instead keep tweets int a memory
-                with open(self.file_save_path, 'a') as f:
+                with open(self.file_save_path, 'a', encoding="utf-8") as f:
                     f.write(str(tweet))
 
                 if tw.mine_status != True:
