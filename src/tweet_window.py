@@ -162,7 +162,13 @@ class TweetWindow(QWidget):
         "\' --follow=\'" + twitter_info_all["SearchConfig"]["follow_id"]+\
         "\' --languages=" + twitter_info_all["SearchConfig"]["language"]
         
-        process = subprocess.Popen("exec " + cmd, shell=True, stdout=subprocess.PIPE)
+        prefix = ""
+        if current_os == 'darwin':
+            prefix = "exec "
+        elif current_os == 'win32':
+            prefix = ""
+            
+        process = subprocess.Popen(prefix + cmd, shell=True, stdout=subprocess.PIPE)
         self.mine_process = process
         
         self.show_mine_start_stop_message_dialog(start=True)
