@@ -18,4 +18,5 @@
 <ul>
   <strike><li>Currently user can only save output file in Mac OS. Should also save output in Windows OS too.</li></strike>
   <li>Need to handle some inputs like follow, locations</li>
+  <li>optional: Need to convert json to csv</li>
 </ul>
