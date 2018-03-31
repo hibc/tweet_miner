@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt, QDir
 from tweet_mine import *
 
+import tweet_mine as tw
 import sys
 import os
 import subprocess, shlex
@@ -10,6 +11,7 @@ import subprocess, shlex
 current_os = sys.platform
 mine_status = True
 verified_user = None
+num_of_tweets = 0
 
 class TweetWindow(QWidget):
     def __init__(self):
@@ -190,14 +192,13 @@ class TweetWindow(QWidget):
             msg_box.exec_()
         except Exception as e:
             print(str(e))
-
-        
+  
     def on_click_mine_stop_btn(self):
-        print("pressed stop mining button")
+        mine_status = False
+
         if self.mine_process is not None:
             self.mine_process.kill()
-            print(self.mine_process.stdout.read())
-        mine_status = False
+
         self.show_mine_start_stop_message_dialog(start=False)
 
     def show_mine_start_stop_message_dialog(self, start=False):

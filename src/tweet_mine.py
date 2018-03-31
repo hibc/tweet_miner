@@ -26,10 +26,10 @@ languages:
     Will only return Tweets that have been detected as being
     written in the specified languages. [Optional]
 '''
-    
+
 class TweetMine():
     def __init__(self, config_args=None):
-        self.numer_of_msg = 0
+        self.num_of_msg = 0
         self.api = None
         self.consumer_key = config_args.consumer_key
         self.consumer_secret = config_args.consumer_secret
@@ -68,30 +68,23 @@ class TweetMine():
         self.search_track_list = None if self.search_track == "" else self.search_track.split(',')
     
     def run(self):
-        num_of_tweets = 0
         # # api.GetStreamFilter will return a generator that yields one status
         # # message (i.e., Tweet) at a time as a JSON dictionary.
         try:
             for tweet in self.api.GetStreamFilter(track=self.search_track_list, 
                 languages=self.languages, locations=self.search_location, 
                 follow=self.search_follow_list):
-                num_of_tweets += 1
-
                 # it might be good to write to a file
                 # instead keep tweets int a memory
                 with open(self.file_save_path, 'a', encoding="utf-8") as f:
                     f.write(str(tweet))
 
                 if tw.mine_status != True:
-                    break
-                    
+                    return
         except Exception as e:
             print("ERROR: " + repr(e))
         
-        print("Mining has stopped..")
-        print('Total number of tweet: {0}'.format(num_of_tweets))
-
-
+        
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='arguments for Tweet Mining')
     parser.add_argument('--consumer_key', type=str)
@@ -106,10 +99,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--file_path', type=str)
     args = parser.parse_args()
-
-    print("\nconsumer_key: {0}\nconsumer_secret: {1}\naccess_token: {2}\naccess_secret: {3}\n".format(args.consumer_key, args.consumer_secret, args.access_token, args.access_secret))
-    print("location: {0}\nlaunguages: {1}\nfollow: {2}\ntrack: {3}\n".format(args.locations, args.languages, args.follow, args.track))
-    print("file_path: {0}\n".format(args.file_path))
     # sys.exit(0)
     tm = TweetMine(config_args=args)
     tm.run()
+    sys.exit(0)
