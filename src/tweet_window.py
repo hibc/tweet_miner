@@ -207,8 +207,10 @@ class TweetWindow(QWidget):
         msg_box.setWindowTitle("Twitter Tweet Miner")
         if start is False:
             msg_box.setText("Mining has stopped !!")
+            mine_status = False
         else:
             msg_box.setText("Mining has started !!")
+            mine_status = True
         
         try:
             msg_box.exec_()
