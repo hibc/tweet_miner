@@ -16,6 +16,6 @@
 
 <h4>TODO:</h4>
 <ul>
-  <li>Currently user can only save output file in Mac OS. Should also save output in Windows OS too.</li>
-  <li>Need to handle some inputs like follow, locations and languages.</li>
+  <strike><li>Currently user can only save output file in Mac OS. Should also save output in Windows OS too.</li></strike>
+  <li>Need to handle some inputs like follow, locations</li>
 </ul>
