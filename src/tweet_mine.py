@@ -72,20 +72,19 @@ class TweetMine():
         # # api.GetStreamFilter will return a generator that yields one status
         # # message (i.e., Tweet) at a time as a JSON dictionary.
         try:
-            with open(self.file_save_path, 'a', encoding="utf-8") as f:
-                for tweet in self.api.GetStreamFilter(track=self.search_track_list, 
-                    languages=self.languages, locations=self.search_location, 
-                    follow=self.search_follow_list):
-                # it might be good to write to a file
-                # instead keep tweets int a memory
-                # with open(self.file_save_path, 'a', encoding="utf-8") as f:
-                #     f = csv.writer(f)
-                #     data = twitter.Status.NewFromJsonDict(tweet)
-                #     row = [data.created_at, data.id, data.user.name, data.user.screen_name, data.user.location, data.time_zone, data.text, data.quote_count, data.reply_count, data.retweet_count, data.favorite_count]
-                #     f.writerow(row)
-                    f.write(str(tweet))
-                    if tw.mine_status != True:
-                        return
+            for tweet in self.api.GetStreamFilter(track=self.search_track_list, 
+                languages=self.languages, locations=self.search_location, 
+                follow=self.search_follow_list):
+                
+                with open(self.file_save_path, 'a', encoding="utf-8") as f:
+                    f_writer = csv.writer(f)
+                    data = twitter.Status.NewFromJsonDict(tweet)
+                    row = [data.created_at, data.id, data.user.screen_name, data.user.time_zone, data.user.location, data.text]
+                
+                    f_writer.writerow(row)
+   
+                if tw.mine_status != True:
+                    return
         except Exception as e:
             print("ERROR: " + repr(e))
         
