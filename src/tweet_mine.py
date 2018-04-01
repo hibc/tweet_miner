@@ -79,8 +79,8 @@ class TweetMine():
                 with open(self.file_save_path, 'a', encoding="utf-8") as f:
                     f_writer = csv.writer(f)
                     data = twitter.Status.NewFromJsonDict(tweet)
-                    # seems there is an error when getting data.reply_count  
-                    row = [data.created_at, data.id, data.user.screen_name, data.user.time_zone, data.user.location, data.text, data.retweet_count, data.favorite_count]
+                    # TODO: problem: streaming stops when we add more field such as data.retweet_count, data.favorite_count etc
+                    row = [data.created_at, data.id, data.user.screen_name, data.user.time_zone, data.user.location, data.text]
                 
                     f_writer.writerow(row)
    
