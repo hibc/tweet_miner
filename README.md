@@ -17,11 +17,10 @@
 <h4>TODO:</h4>
 <ul>
   <strike><li>Currently user can only save output file in Mac OS. Should also save output in Windows OS too.</li></strike>
-  <strike><li>Handle input Languages</li></strike>
   <strike><li>Handle input Followers ID</li></strike>  
   <strike><li>Handle input language</li></strike>  
+  <strile><li>Saving output from streaming into CSV.</li></strike>
+  <li>Streaming returns invalid JSON format output. Because of this issue, it makes us unable to save outputs into csv.</li>
   <li>Handle inputs Locations</li>
   <li>Display number of total tweets gathered in popup dialogue</li>
-  <li>optional: Need to convert json to csv</li>
-  
 </ul>
