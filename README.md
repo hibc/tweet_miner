@@ -20,6 +20,7 @@
   <strike><li>Handle input Followers ID</li></strike>  
   <strike><li>Handle input language</li></strike>  
   <strike><li>Saving output from streaming into CSV.</li></strike>
+  <li>Handle communication between GUI (tweet window) and external program (tweet_mine) </li>
   <li>Streaming returns invalid JSON format output. Because of this issue, it makes us unable to save outputs into csv.</li>
   <li>Handle inputs Locations</li>
   <li>Display number of total tweets gathered in popup dialogue</li>
