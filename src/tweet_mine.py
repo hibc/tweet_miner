@@ -85,6 +85,8 @@ class TweetMine():
                 
                 for line in stream:
                     f.write(str(line))
+                    # TODO: seems like this if condition doesn't work
+                    # need to find a way to communicate between tweet_mine and tweet_window
                     if tw.mine_status is not True:
                         break
                         
