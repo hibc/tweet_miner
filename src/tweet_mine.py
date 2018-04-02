@@ -1,5 +1,4 @@
 from twitter import Api
-from twitter import error
 from tweet_window import *
 
 import tweet_window as tw
@@ -9,6 +8,7 @@ import argparse
 import sys
 import twitter
 import csv
+import json
 
 '''
 follow:
@@ -72,20 +72,22 @@ class TweetMine():
         # # api.GetStreamFilter will return a generator that yields one status
         # # message (i.e., Tweet) at a time as a JSON dictionary.
         try:
-            for tweet in self.api.GetStreamFilter(track=self.search_track_list, 
+            stream =self.api.GetStreamFilter(track=self.search_track_list, 
                 languages=self.languages, locations=self.search_location, 
-                follow=self.search_follow_list):
+                follow=self.search_follow_list)
+                             
+            with open(self.file_save_path, 'a', encoding="utf-8") as f:
+                # f_writer = csv.writer(f)
+                # data = twitter.Status.NewFromJsonDict(tweet)
+                # # TODO: problem: streaming stops when we add more field such as data.retweet_count, data.favorite_count etc
+                # row = [data.created_at, data.id, data.user.screen_name, data.user.time_zone, data.user.location, data.text]               
+                # f_writer.writerow(row)
                 
-                with open(self.file_save_path, 'a', encoding="utf-8") as f:
-                    f_writer = csv.writer(f)
-                    data = twitter.Status.NewFromJsonDict(tweet)
-                    # TODO: problem: streaming stops when we add more field such as data.retweet_count, data.favorite_count etc
-                    row = [data.created_at, data.id, data.user.screen_name, data.user.time_zone, data.user.location, data.text]
-                
-                    f_writer.writerow(row)
-   
-                if tw.mine_status != True:
-                    return
+                for line in stream:
+                    f.write(str(line))
+                    if tw.mine_status is not True:
+                        break
+                        
         except Exception as e:
             print("ERROR: " + repr(e))
         
