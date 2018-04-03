@@ -77,11 +77,6 @@ class TweetMine():
                 follow=self.search_follow_list):
                 print("stream found !!")     
                 with open(self.file_save_path, 'a', encoding="utf-8") as f:
-                    # f_writer = csv.writer(f)
-                    # data = twitter.Status.NewFromJsonDict(tweet)
-                    # # TODO: problem: streaming stops when we add more field such as data.retweet_count, data.favorite_count etc
-                    # row = [data.created_at, data.id, data.user.screen_name, data.user.time_zone, data.user.location, data.text]               
-                    # f_writer.writerow(row)
                     f.write(str(stream))
                         
         except Exception as e:
