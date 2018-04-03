@@ -17,9 +17,6 @@ num_of_tweets = 0
 
 
 class WorkerSignals(QObject):
-    '''
-
-    '''
     pass
 
 
