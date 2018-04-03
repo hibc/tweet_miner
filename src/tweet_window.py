@@ -15,6 +15,14 @@ mine_status = True
 verified_user = None
 num_of_tweets = 0
 
+
+class WorkerSignals(QObject):
+    '''
+
+    '''
+    pass
+
+
 class Worker(QRunnable):
     '''
     Worker thread
