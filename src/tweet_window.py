@@ -7,11 +7,39 @@ import sys
 import os
 import subprocess, shlex
 # import json
+import threading
+import Queue
 
 current_os = sys.platform
 mine_status = True
 verified_user = None
 num_of_tweets = 0
+
+class Worker(QRunnable):
+    '''
+    Worker thread
+
+    Inherits from QRunnable to handler worker thread setup, signals and wrap-up.
+
+    :param callback: The function callback to run on this worker thread. Supplied args and 
+                     kwargs will be passed through to the runner.
+    :type callback: function
+    :param args: Arguments to pass to the callback function
+    :param kwargs: Keywords to pass to the callback function
+
+    '''
+
+    def __init__(self, fn, *args, **kwargs):
+        super(Worker, self).__init__()
+        pass
+
+    @pyqtSlot()
+    def run(self):
+        '''
+        Initialise the runner function with passed args, kwargs.
+        '''
+        pass
+
 
 class TweetWindow(QWidget):
     def __init__(self):
@@ -164,6 +192,7 @@ class TweetWindow(QWidget):
         
         args = shlex.split(cmd)
         process = subprocess.Popen(args, stdout=subprocess.PIPE)
+
         self.mine_process = process
         
         self.show_mine_start_stop_message_dialog(start=True)
